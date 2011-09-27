@@ -23,8 +23,8 @@ public class SensorListener implements Runnable, Constants {
     @Override
     public void run() {
         while (true) {
-            SensorValues.LightValues.set(LightSensor1, s1.readValue());
-            SensorValues.LightValues.set(LightSensor2, s2.readValue());
+            SensorValues.LightValues.set(LightSensorR, s1.readValue());
+            SensorValues.LightValues.set(LightSensorL, s2.readValue());
             SensorValues.LightValues.set(LightSensor3, s3.readValue());
             
             SensorValues.TachoValues.set(TachoA, Motor.A.getTachoCount());
@@ -33,8 +33,8 @@ public class SensorListener implements Runnable, Constants {
             
 
 
-            LCD.drawString("LightSensor1: " + Integer.toString(SensorValues.LightValues.get(LightSensor1)), 0, 0);
-            LCD.drawString("LightSensor2: " + Integer.toString(SensorValues.LightValues.get(LightSensor2)), 0, 1);
+            LCD.drawString("LightSensor1: " + Integer.toString(SensorValues.LightValues.get(LightSensorR)), 0, 0);
+            LCD.drawString("LightSensor2: " + Integer.toString(SensorValues.LightValues.get(LightSensorL)), 0, 1);
             LCD.drawString("LightSensor3: " + Integer.toString(SensorValues.LightValues.get(LightSensor3)), 0, 2);
             
             LCD.drawString("TachoA " + Integer.toString(SensorValues.TachoValues.get(TachoA)), 0, 3);

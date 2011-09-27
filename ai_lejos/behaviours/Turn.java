@@ -26,23 +26,26 @@ public class Turn implements Constants {
             left();
         }
         right();
+        
+        Motor.A.stop();
+        Motor.B.stop();
 
     }
 
-    private void left() {
+    private void right() {
         Motor.A.setSpeed(SlowSpeed);
         Motor.B.setSpeed(SlowSpeed);
         //start the engines:
-        Motor.A.backward();
-        Motor.B.forward();
+        Motor.B.backward();
+        Motor.A.forward();
         boolean turn = true;
 
         while (turn == true) {
-            if (SensorValues.LightValues.get(LightSensor1) > HighLightThress) {
-                SavedS1 = 1;
-                if (SensorValues.LightValues.get(LightSensor2) > HighLightThress) {
-                    SavedS2 = 1;
-                    if (SensorValues.LightValues.get(LightSensor2) < HighLightThress) {
+            if (SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
+                
+                if (SensorValues.LightValues.get(LightSensorR) > HighLightThress) {
+                    
+                    if (SensorValues.LightValues.get(LightSensorR) < HighLightThress) {
                         turn = false;
                     }
                 }
@@ -53,20 +56,20 @@ public class Turn implements Constants {
 
     }
 
-    private void right() {
+    private void left() {
         Motor.B.setSpeed(SlowSpeed);
         Motor.A.setSpeed(SlowSpeed);
         //start the engines:
-        Motor.B.backward();
-        Motor.A.forward();
+        Motor.A.backward();
+        Motor.B.forward();
         boolean turn = true;
 
         while (turn == true) {
-            if (SensorValues.LightValues.get(LightSensor2) > HighLightThress) {
-                SavedS1 = 1;
-                if (SensorValues.LightValues.get(LightSensor1) > HighLightThress) {
-                    SavedS2 = 1;
-                    if (SensorValues.LightValues.get(LightSensor1) < HighLightThress) {
+            if (SensorValues.LightValues.get(LightSensorR) > HighLightThress) {
+                
+                if (SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
+                    
+                    if (SensorValues.LightValues.get(LightSensorL) < HighLightThress) {
                         turn = false;
                     }
                 }

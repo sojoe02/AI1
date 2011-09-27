@@ -23,18 +23,18 @@ public class Forward implements Constants {
 
         while (drive == true) {
             //control of drivestate.
-            if (SensorValues.LightValues.get(LightSensor1) < HighLightThress
-                    && SensorValues.LightValues.get(LightSensor2) < HighLightThress) {
+            if (SensorValues.LightValues.get(LightSensorR) < HighLightThress
+                    && SensorValues.LightValues.get(LightSensorL) < HighLightThress) {
                 control = 's';
-            } else if (SensorValues.LightValues.get(LightSensor1) > HighLightThress
-                    && SensorValues.LightValues.get(LightSensor2) < HighLightThress) {
+            } else if (SensorValues.LightValues.get(LightSensorR) > HighLightThress
+                    && SensorValues.LightValues.get(LightSensorL) < HighLightThress) {
                 control = 'l';
-            } else if (SensorValues.LightValues.get(LightSensor1) < HighLightThress
-                    && SensorValues.LightValues.get(LightSensor2) > HighLightThress) {
+            } else if (SensorValues.LightValues.get(LightSensorR) < HighLightThress
+                    && SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
                 control = 'r';
                 //else when you have reached a crosssection:
-            } else if (SensorValues.LightValues.get(LightSensor1) > HighLightThress
-                    && SensorValues.LightValues.get(LightSensor2) > HighLightThress) {
+            } else if (SensorValues.LightValues.get(LightSensorR) > HighLightThress
+                    && SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
                 control = 'e';
                 drive = false;
             }
