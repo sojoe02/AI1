@@ -4,15 +4,31 @@
  */
 package ai_lejos.behaviours;
 
+import ai_lejos.interfaces.Constants;
+import ai_lejos.physical.SensorValues;
+import lejos.nxt.Motor;
+
 /**
  *
  * @author sojoe
  */
-public class ReleaseCan implements Runnable{
-
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet.");
+public class ReleaseCan implements Constants{
+    
+    public ReleaseCan(){
+        Motor.A.resetTachoCount();
+        Motor.A.setSpeed(MaxSpeed);
+        Motor.B.setSpeed(MaxSpeed);
+        
+        if(SensorValues.TachoValues.get(TachoA) >= TachoThressRelease){
+            Motor.A.stop();
+            Motor.B.stop();
+            Motor.C.rotate(ReleaseAngle, true);
+        }
+        
+        new Turn(true);
+        new Forward();
     }
+
+
     
 }
