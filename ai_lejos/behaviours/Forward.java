@@ -6,6 +6,7 @@ package ai_lejos.behaviours;
 
 import ai_lejos.interfaces.*;
 import ai_lejos.physical.SensorValues;
+import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 
 /**
@@ -17,27 +18,36 @@ public class Forward implements Constants {
     public Forward() {
 
         boolean drive = true;
-        
+
+        Motor.A.setSpeed(MaxSpeed);
+        Motor.B.setSpeed(MaxSpeed);
+
         Motor.A.backward();
         Motor.B.backward();
 
 
         while (drive == true) {
             //control of drivestate.
-            if (SensorValues.LightValues.get(LightSensorR) < HighLightThress
-                    && SensorValues.LightValues.get(LightSensorL) < HighLightThress) {
+            if (SensorValues.getLightValue(LightSensorR) > HighLightThress
+                    && SensorValues.getLightValue(LightSensorL) > HighLightThress) {
                 driveControl('s');
-            } else if (SensorValues.LightValues.get(LightSensorR) > HighLightThress
-                    && SensorValues.LightValues.get(LightSensorL) < HighLightThress) {
+                LCD.drawString("Driving straight", 0, 7);
+
+            } else if (SensorValues.getLightValue(LightSensorR) < HighLightThress
+                    && SensorValues.getLightValue(LightSensorL) > HighLightThress) {
                 driveControl('r');
-            } else if (SensorValues.LightValues.get(LightSensorR) < HighLightThress
-                    && SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
+                LCD.drawString("Driving right", 0, 7);
+            } else if (SensorValues.getLightValue(LightSensorR) > HighLightThress
+                    && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
                 driveControl('l');
+                LCD.drawString("Driving left", 0, 7);
                 //else when you have reached a crosssection:
-            } else if (SensorValues.LightValues.get(LightSensorR) > HighLightThress
-                    && SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
-                driveControl('s');
-                drive = false;
+            } else if (SensorValues.getLightValue(LightSensorR) < HighLightThress
+                    && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+                driveControl('e');
+                LCD.drawString("Stopping            ", 0, 7);
+                break;
+                //drive = false;
             }
         }
 
@@ -59,18 +69,28 @@ public class Forward implements Constants {
                 Motor.B.setSpeed(MediumSpeed);
                 break;
             case 'e':
-                boolean drift = true;
-                Motor.A.resetTachoCount();
-                while (drift) {
-                    if (-SensorValues.TachoValues.get(TachoA) > TachoThressStop) {
-                        Motor.A.stop();
-                        Motor.B.stop();
-                        drift = false;
-                    }
-
-                }
+                drift();
+                break;
             default:
                 break;
         }
+    }
+
+    private void drift() {
+        boolean drift = true;
+
+
+        int oldTacho = SensorValues.getTachoValue(TachoA);
+
+        while (drift) {
+           // if (SensorValues.getTachoValue(TachoA) > 0) {
+                if (SensorValues.getTachoValue(TachoA)-oldTacho > TachoThressStop) {
+                    Motor.A.flt(true);
+                    Motor.B.flt(true);
+                    drift = false;
+           //     }
+            }
+        }
+
     }
 }

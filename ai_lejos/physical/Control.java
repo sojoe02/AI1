@@ -1,6 +1,7 @@
 package ai_lejos.physical;
 
 import ai_lejos.logical.Instructor;
+import lejos.nxt.Button;
 
 public class Control {
 
@@ -10,6 +11,7 @@ public class Control {
 		Locomotion locomotion = new Locomotion(sensorValues, instructor);
 		
 		new Thread(sensorListener).start();
+                Button.waitForPress();
 		new Thread(locomotion).start();
 	}
 	

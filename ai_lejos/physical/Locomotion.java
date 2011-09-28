@@ -1,8 +1,10 @@
 package ai_lejos.physical;
 
 import ai_lejos.interfaces.Constants;
-import lejos.nxt.*;
+//import lejos.nxt.*;
 import ai_lejos.logical.Instructor;
+import ai_lejos.behaviours.*;
+//import lejos.robotics.subsumption.Behavior;
 
 public class Locomotion implements Runnable, Constants{
 	SensorValues values;
@@ -20,14 +22,17 @@ public class Locomotion implements Runnable, Constants{
 
 			switch (behavior) {
 			case FORWARD:
-				forward();
+				new Forward();
 				break;
 			case LEFT:
-				left();
+				new Turn(true);
 				break;
-			case RIGHT:
-				right();
+			case RIGHT:				
+                                new Turn(false);
 				break;
+                        case RELEASE:
+                                new ReleaseCan();
+                                break;                                
 			default:
 				break;
 			}
@@ -38,19 +43,7 @@ public class Locomotion implements Runnable, Constants{
 
 	} 
 
-	public void forward() throws InterruptedException{
-		//Motor.A.forward();
-		//Motor.B.forward();
-		Button.waitForPress();
-	}
 
-	private void left(){
-
-	}
-
-	private void right(){
-
-	}
 
 
 

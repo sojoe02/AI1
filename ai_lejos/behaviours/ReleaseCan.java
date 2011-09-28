@@ -22,8 +22,10 @@ public class ReleaseCan implements Constants {
 
         Motor.A.backward();
         Motor.B.backward();
+        
+        
 
-        if (-SensorValues.TachoValues.get(TachoA) >= TachoThressRelease) {
+        if (-SensorValues.getTachoValue(TachoA) >= TachoThressRelease) {
             Motor.A.stop();
             Motor.B.stop();
             Motor.C.rotate(ReleaseAngle, true);

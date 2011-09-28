@@ -41,11 +41,11 @@ public class Turn implements Constants {
         boolean turn = true;
 
         while (turn == true) {
-            if (SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
+            if (SensorValues.getLightValue(LightSensorL) < HighLightThress) {
                 
-                if (SensorValues.LightValues.get(LightSensorR) > HighLightThress) {
+                if (SensorValues.getLightValue(LightSensorR) < HighLightThress) {
                     
-                    if (SensorValues.LightValues.get(LightSensorR) < HighLightThress) {
+                    if (SensorValues.getLightValue(LightSensorR) > HighLightThress) {
                         turn = false;
                     }
                 }
@@ -65,11 +65,11 @@ public class Turn implements Constants {
         boolean turn = true;
 
         while (turn == true) {
-            if (SensorValues.LightValues.get(LightSensorR) > HighLightThress) {
+            if (SensorValues.getLightValue(LightSensorR) < HighLightThress) {
                 
-                if (SensorValues.LightValues.get(LightSensorL) > HighLightThress) {
+                if (SensorValues.getLightValue(LightSensorL) < HighLightThress) {
                     
-                    if (SensorValues.LightValues.get(LightSensorL) < HighLightThress) {
+                    if (SensorValues.getLightValue(LightSensorL) > HighLightThress) {
                         turn = false;
                     }
                 }
