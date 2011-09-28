@@ -33,8 +33,8 @@ public class SensorListener implements Runnable, Constants {
             
 
 
-            LCD.drawString("LightSensor1: " + Integer.toString(SensorValues.getLightValue(LightSensorR)), 0, 0);
-            LCD.drawString("LightSensor2: " + Integer.toString(SensorValues.getLightValue(LightSensorL)), 0, 1);
+            LCD.drawString("LightSensorR: " + Integer.toString(SensorValues.getLightValue(LightSensorR)), 0, 0);
+            LCD.drawString("LightSensorL: " + Integer.toString(SensorValues.getLightValue(LightSensorL)), 0, 1);
             LCD.drawString("LightSensor3: " + Integer.toString(SensorValues.getLightValue(LightSensor3)), 0, 2);
             
             LCD.drawString("TachoA " + Integer.toString(SensorValues.getTachoValue(TachoA)), 0, 3);

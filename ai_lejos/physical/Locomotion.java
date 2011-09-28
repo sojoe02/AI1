@@ -17,6 +17,8 @@ public class Locomotion implements Runnable, Constants{
 
 	@Override
 	public void run() {
+            boolean fetchInstructions = true;
+            while(fetchInstructions){
 		try {
 			int behavior = instructor.getNextInstruction();
 
@@ -32,14 +34,21 @@ public class Locomotion implements Runnable, Constants{
 				break;
                         case RELEASE:
                                 new ReleaseCan();
-                                break;                                
+                                break;
+                        case BREAK:
+                            fetchInstructions = false;
+                            break;
+                                
 			default:
 				break;
 			}
+                
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+            }
+            
 
 	} 
 

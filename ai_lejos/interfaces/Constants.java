@@ -5,6 +5,7 @@ public interface Constants {
 	public static final int LEFT = 2;
 	public static final int RIGHT = 3;
         public static final int RELEASE = 4;
+        public static final int BREAK = 5;
 	
 	public static final int LightSensorR = 0;
 	public static final int LightSensorL = 1;
@@ -28,16 +29,17 @@ M*(2)=MediumSpeed(90%)
 M*(3)=MaxSpeed(100%)
 --
 TM*(1)=TachoThresshold(200)*/        
-        public static final int LowLightThress = 30;
-        public static final int HighLightThress = 40;
+        public static final int LowLightThress = 38;
+        public static final int HighLightThress = 44;
         
         public static final int Stop = 0;
-        public static final int SlowSpeed=50;
-        public static final int MediumSpeed=180;
+        public static final int TurnSpeed=100;
+        public static final int CompensationSpeed=170;
         public static final int MaxSpeed=200;
         
-        public static final int TachoThressStop= 100;
+        public static final int TachoThressStop= 20;
         public static final int TachoThressRelease=20;
-        public static final int ReleaseAngle=-90;
+        public static final int TachoThressTurn=60;
+        public static final int ReleaseAngle=-120;
 	
 }

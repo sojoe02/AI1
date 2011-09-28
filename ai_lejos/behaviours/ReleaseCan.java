@@ -15,23 +15,34 @@ import lejos.nxt.Motor;
 public class ReleaseCan implements Constants {
 
     public ReleaseCan() {
-        Motor.A.resetTachoCount();
+        int oldtacho = SensorValues.getTachoValue(TachoA);
 
         Motor.A.setSpeed(MaxSpeed);
         Motor.B.setSpeed(MaxSpeed);
+        
 
         Motor.A.backward();
         Motor.B.backward();
-        
-        
 
-        if (-SensorValues.getTachoValue(TachoA) >= TachoThressRelease) {
-            Motor.A.stop();
-            Motor.B.stop();
-            Motor.C.rotate(ReleaseAngle, true);
+        boolean releasing = true;
+
+
+        while (releasing) {
+
+            if (SensorValues.getTachoValue(TachoA) - oldtacho >= TachoThressRelease) {
+                Motor.A.stop();
+                Motor.B.stop();
+                //Motor.C.rotate(ReleaseAngle, true);
+                Motor.C.rotateTo(ReleaseAngle);
+                Motor.C.rotateTo(0);                
+                releasing = false;               
+                
+                
+            }
         }
+        Motor.C.flt(true);
 
-        new Turn(true);
-        new Forward();
+        //new Turn(true);
+        //new Forward();
     }
 }

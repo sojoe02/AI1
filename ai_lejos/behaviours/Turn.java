@@ -14,42 +14,46 @@ import ai_lejos.physical.SensorValues;
  */
 public class Turn implements Constants {
 
-    int SavedS1;
-    int SavedS2;
-
     public Turn(boolean left) {
 
-        SavedS1 = 0;
-        SavedS2 = 0;
 
         if (left) {
             left();
+        } else {
+            right();
         }
-        right();
-        
-        Motor.A.stop();
-        Motor.B.stop();
+
+        Motor.A.flt(true);
+        Motor.B.flt(true);
 
     }
 
     private void right() {
-        Motor.A.setSpeed(SlowSpeed);
-        Motor.B.setSpeed(SlowSpeed);
+        Motor.A.setSpeed(TurnSpeed);
+        Motor.B.setSpeed(TurnSpeed);
         //start the engines:
         Motor.B.backward();
         Motor.A.forward();
         boolean turn = true;
 
+
+        int next = 0;
+
         while (turn == true) {
-            if (SensorValues.getLightValue(LightSensorL) < HighLightThress) {
-                
-                if (SensorValues.getLightValue(LightSensorR) < HighLightThress) {
-                    
-                    if (SensorValues.getLightValue(LightSensorR) > HighLightThress) {
-                        turn = false;
-                    }
-                }
+            if (SensorValues.getLightValue(LightSensorR) > HighLightThress && next == 0) {
+                LCD.drawString("LightsensorR black", 0, 7);
+                next = 1;
             }
+
+            if (SensorValues.getLightValue(LightSensorR) < HighLightThress && next == 1) {
+                LCD.drawString("LightsensorR black", 0, 7);
+                next = 2;
+            }
+
+            if (SensorValues.getLightValue(LightSensor3) < LowLightThress && next == 2) {
+                turn = false;
+            }
+
         }
 
 
@@ -57,24 +61,30 @@ public class Turn implements Constants {
     }
 
     private void left() {
-        Motor.B.setSpeed(SlowSpeed);
-        Motor.A.setSpeed(SlowSpeed);
+        Motor.B.setSpeed(TurnSpeed);
+        Motor.A.setSpeed(TurnSpeed);
         //start the engines:
         Motor.A.backward();
         Motor.B.forward();
         boolean turn = true;
 
-        while (turn == true) {
-            if (SensorValues.getLightValue(LightSensorR) < HighLightThress) {
-                
-                if (SensorValues.getLightValue(LightSensorL) < HighLightThress) {
-                    
-                    if (SensorValues.getLightValue(LightSensorL) > HighLightThress) {
-                        turn = false;
-                    }
-                }
-            }
-        }
+        int next = 0;
 
+        while (turn == true) {
+            if (SensorValues.getLightValue(LightSensorL) > HighLightThress && next == 0) {
+                LCD.drawString("LightsensorL black", 0, 7);
+                next = 1;
+            }
+
+            if (SensorValues.getLightValue(LightSensorL) < HighLightThress && next == 1) {
+                LCD.drawString("LightsensorL black", 0, 7);
+                next = 2;
+            }
+
+            if (SensorValues.getLightValue(LightSensor3) < LowLightThress && next == 2) {
+                turn = false;
+            }
+
+        }
     }
 }

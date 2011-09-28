@@ -1,8 +1,5 @@
 package ai_lejos.physical;
-
-import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.List;
+ 
 
 public class SensorValues {
     
@@ -25,7 +22,6 @@ public class SensorValues {
          return LightValues[index];
          //return LightValues.get(index);
      }
-     
           
      public static synchronized void setTachoValue(int index, int value){
          if (-value < 0){

@@ -33,17 +33,19 @@ public class Forward implements Constants {
                 driveControl('s');
                 LCD.drawString("Driving straight", 0, 7);
 
-            } else if (SensorValues.getLightValue(LightSensorR) < HighLightThress
+            } 
+            if (SensorValues.getLightValue(LightSensorR) < HighLightThress
                     && SensorValues.getLightValue(LightSensorL) > HighLightThress) {
                 driveControl('r');
                 LCD.drawString("Driving right", 0, 7);
-            } else if (SensorValues.getLightValue(LightSensorR) > HighLightThress
+            } 
+            if (SensorValues.getLightValue(LightSensorR) > HighLightThress
                     && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
                 driveControl('l');
                 LCD.drawString("Driving left", 0, 7);
                 //else when you have reached a crosssection:
-            } else if (SensorValues.getLightValue(LightSensorR) < HighLightThress
-                    && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+            }
+            if (SensorValues.getLightValue(LightSensorR) < HighLightThress && SensorValues.getLightValue(LightSensorL) <HighLightThress) {
                 driveControl('e');
                 LCD.drawString("Stopping            ", 0, 7);
                 break;
@@ -61,12 +63,12 @@ public class Forward implements Constants {
                 Motor.B.setSpeed(MaxSpeed);
                 break;
             case 'r':
-                Motor.A.setSpeed(MediumSpeed);
-                Motor.B.setSpeed(MaxSpeed);
+                Motor.A.setSpeed(CompensationSpeed);
+                //Motor.B.setSpeed(MaxSpeed);
                 break;
             case 'l':
-                Motor.A.setSpeed(MaxSpeed);
-                Motor.B.setSpeed(MediumSpeed);
+                //Motor.A.setSpeed(MaxSpeed);
+                Motor.B.setSpeed(CompensationSpeed);
                 break;
             case 'e':
                 drift();
@@ -83,12 +85,12 @@ public class Forward implements Constants {
         int oldTacho = SensorValues.getTachoValue(TachoA);
 
         while (drift) {
-           // if (SensorValues.getTachoValue(TachoA) > 0) {
-                if (SensorValues.getTachoValue(TachoA)-oldTacho > TachoThressStop) {
-                    Motor.A.flt(true);
-                    Motor.B.flt(true);
-                    drift = false;
-           //     }
+            // if (SensorValues.getTachoValue(TachoA) > 0) {
+            if (SensorValues.getTachoValue(TachoA) - oldTacho > TachoThressStop) {
+                Motor.A.flt(true);
+                Motor.B.flt(true);
+                drift = false;
+                //     }
             }
         }
 
