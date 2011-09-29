@@ -22,36 +22,53 @@ public class Forward implements Constants {
         Motor.A.setSpeed(MaxSpeed);
         Motor.B.setSpeed(MaxSpeed);
 
-        Motor.A.backward();
-        Motor.B.backward();
+        //Motor.A.setAcceleration(180);
+        //Motor.B.setAcceleration(180);
+
+
+
+        Motor.A.forward();
+        Motor.B.forward();
+        boolean right = true;
+        boolean left = true;
 
 
         while (drive == true) {
             //control of drivestate.
-            if (SensorValues.getLightValue(LightSensorR) > HighLightThress
-                    && SensorValues.getLightValue(LightSensorL) > HighLightThress) {
-                driveControl('s');
-                LCD.drawString("Driving straight", 0, 7);
 
-            } 
-            if (SensorValues.getLightValue(LightSensorR) < HighLightThress
-                    && SensorValues.getLightValue(LightSensorL) > HighLightThress) {
-                driveControl('r');
-                LCD.drawString("Driving right", 0, 7);
-            } 
-            if (SensorValues.getLightValue(LightSensorR) > HighLightThress
-                    && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+            if (SensorValues.getLightValue(LightSensorR) > LowLightThress && left == true) {
+                //&& SensorValues.getLightValue(LightSensorL) < HighLightThress) {
                 driveControl('l');
-                LCD.drawString("Driving left", 0, 7);
+                LCD.drawString("LEFT   ", 0, 7);
+                right = false;
+                if (SensorValues.getLightValue(LightSensorR) < HighLightThress
+                        && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+                    driveControl('s');
+                    LCD.drawString("STRAIGHT   <", 0, 7);
+                    right = true;
+
+                }
+            }
+            if (SensorValues.getLightValue(LightSensorL) > LowLightThress && right == true) {
+                //&& SensorVaues.getLightValue(LightSensorL) > HighLightThress) {
+                driveControl('r');
+                LCD.drawString("RIGHT       ", 0, 7);
+                left= false;
+                if (SensorValues.getLightValue(LightSensorR) < HighLightThress
+                        && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+                    driveControl('s');
+                    LCD.drawString("STRAIGHT   <", 0, 7);
+                    left = true;
+                }
                 //else when you have reached a crosssection:
             }
-            if (SensorValues.getLightValue(LightSensorR) < HighLightThress && SensorValues.getLightValue(LightSensorL) <HighLightThress) {
+            if (SensorValues.getLightValue(LightSensor3) < HighLightThress) {
                 driveControl('e');
                 LCD.drawString("Stopping            ", 0, 7);
-                break;
-                //drive = false;
+                drive = false;
             }
         }
+
 
     }
 
@@ -62,11 +79,11 @@ public class Forward implements Constants {
                 Motor.A.setSpeed(MaxSpeed);
                 Motor.B.setSpeed(MaxSpeed);
                 break;
-            case 'r':
+            case 'l':
                 Motor.A.setSpeed(CompensationSpeed);
                 //Motor.B.setSpeed(MaxSpeed);
                 break;
-            case 'l':
+            case 'r':
                 //Motor.A.setSpeed(MaxSpeed);
                 Motor.B.setSpeed(CompensationSpeed);
                 break;
@@ -87,6 +104,8 @@ public class Forward implements Constants {
         while (drift) {
             // if (SensorValues.getTachoValue(TachoA) > 0) {
             if (SensorValues.getTachoValue(TachoA) - oldTacho > TachoThressStop) {
+                //Motor.A.setAcceleration(Integer.MAX_VALUE);
+                //Motor.B.setAcceleration(Integer.MAX_VALUE);
                 Motor.A.flt(true);
                 Motor.B.flt(true);
                 drift = false;

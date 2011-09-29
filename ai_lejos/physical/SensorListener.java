@@ -1,10 +1,10 @@
 package ai_lejos.physical;
 
 import ai_lejos.interfaces.Constants;
+
 import lejos.nxt.LCD;
 import lejos.nxt.LightSensor;
 import lejos.nxt.Motor;
-import lejos.nxt.SensorPort;
 
 public class SensorListener implements Runnable, Constants {
 
@@ -13,19 +13,23 @@ public class SensorListener implements Runnable, Constants {
     LightSensor s3;
     //SensorValues values;
 
-    public SensorListener(SensorValues values) {
-        s1 = new LightSensor(SensorPort.S1);
-        s2 = new LightSensor(SensorPort.S2);
-        s3 = new LightSensor(SensorPort.S3);
+    public SensorListener(SensorValues values, LightSensor s1, LightSensor s2, LightSensor s3) {
+        this.s1 = s1;
+        this.s2 = s2;
+        this.s3 = s3;
+  
         //this.values = values;
     }
 
     @Override
     public void run() {
         while (true) {
-            SensorValues.setLightValue(LightSensorR, s1.readValue());
-            SensorValues.setLightValue(LightSensorL, s2.readValue());
-            SensorValues.setLightValue(LightSensor3, s3.readValue());
+            SensorValues.setLightValue(LightSensorR, s1.getLightValue());
+            SensorValues.setLightValue(LightSensorL, s2.getLightValue());
+            SensorValues.setLightValue(LightSensor3, s3.getLightValue());
+            
+            
+            
             
             SensorValues.setTachoValue(TachoA, Motor.A.getTachoCount());
             SensorValues.setTachoValue(TachoB, Motor.B.getTachoCount());

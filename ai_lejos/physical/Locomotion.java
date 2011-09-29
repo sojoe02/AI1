@@ -4,6 +4,7 @@ import ai_lejos.interfaces.Constants;
 //import lejos.nxt.*;
 import ai_lejos.logical.Instructor;
 import ai_lejos.behaviours.*;
+import lejos.nxt.Button;
 //import lejos.robotics.subsumption.Behavior;
 
 public class Locomotion implements Runnable, Constants{
@@ -20,7 +21,9 @@ public class Locomotion implements Runnable, Constants{
             boolean fetchInstructions = true;
             while(fetchInstructions){
 		try {
+                    //Button.waitForPress();
 			int behavior = instructor.getNextInstruction();
+                        
 
 			switch (behavior) {
 			case FORWARD:

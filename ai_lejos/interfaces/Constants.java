@@ -29,15 +29,15 @@ M*(2)=MediumSpeed(90%)
 M*(3)=MaxSpeed(100%)
 --
 TM*(1)=TachoThresshold(200)*/        
-        public static final int LowLightThress = 38;
-        public static final int HighLightThress = 44;
+        public static final int LowLightThress = 40;
+        public static final int HighLightThress = 45;
         
         public static final int Stop = 0;
         public static final int TurnSpeed=100;
-        public static final int CompensationSpeed=170;
+        public static final int CompensationSpeed=225;
         public static final int MaxSpeed=200;
         
-        public static final int TachoThressStop= 20;
+        public static final int TachoThressStop= 160;
         public static final int TachoThressRelease=20;
         public static final int TachoThressTurn=60;
         public static final int ReleaseAngle=-120;

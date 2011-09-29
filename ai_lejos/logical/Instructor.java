@@ -6,7 +6,6 @@ import ai_lejos.interfaces.PhysicalToLogical;
 //import java.awt.Button;
 import java.util.ArrayList;
 
-import lejos.nxt.Button;
 
 
 public class Instructor implements PhysicalToLogical, Constants{
@@ -16,12 +15,15 @@ public class Instructor implements PhysicalToLogical, Constants{
 	public Instructor(){
 		instructions = new ArrayList<Integer>();
                     
+                for(int i = 0; i < 100; i++ ){
                 
+		instructions.add(FORWARD);
+                //Button.waitForPress();
+                instructions.add(LEFT);
+                }
+		//instructions.add(RELEASE);
                 
-		//instructions.add(FORWARD);
-		instructions.add(RELEASE);
-                
-                //instructions.add(FORWARD);
+               //instructions.add(FORWARD);
 		//instructions.add(LEFT);
                 /*instructions.add(FORWARD);
 		instructions.add(RIGHT);

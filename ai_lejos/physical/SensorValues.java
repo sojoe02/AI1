@@ -24,10 +24,10 @@ public class SensorValues {
      }
           
      public static synchronized void setTachoValue(int index, int value){
-         if (-value < 0){
+         if (value < 0){
              TachoValues[index]= 1;
          } else{
-         TachoValues[index]=-value;
+         TachoValues[index]=value;
          }
          //TachoValues.add(index, value);
      }
