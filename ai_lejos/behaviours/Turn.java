@@ -23,8 +23,8 @@ public class Turn implements Constants {
             right();
         }
 
-        Motor.A.flt(true);
-        Motor.B.flt(true);
+        Motor.A.stop(true);
+        Motor.B.stop(true);
 
     }
 
@@ -40,16 +40,16 @@ public class Turn implements Constants {
         int next = 0;
 
         while (turn == true) {
-            if (SensorValues.getLightValue(LightSensor3) < LowLightThress && next == 2) {
+            if (SensorValues.getLightValue(LightSensorL) < LowLightThress && next == 2) {
                 turn = false;
             }
             
-            if (SensorValues.getLightValue(LightSensorR) < LowLightThress && next == 0) {
+            if (SensorValues.getLightValue(LightSensor3) < HighLightThress && next == 0) {
                 LCD.drawString("LightsensorR black", 0, 7);
                 next = 1;
             }
 
-            if (SensorValues.getLightValue(LightSensorL) < LowLightThress && next == 1) {
+            if (SensorValues.getLightValue(LightSensorR) < LowLightThress && next == 1) {
                 LCD.drawString("LightsensorR black", 0, 7);
                 //turn = false;
                 next = 2;
@@ -76,12 +76,13 @@ public class Turn implements Constants {
             if (SensorValues.getLightValue(LightSensorL) < LowLightThress && next == 1) {
                 LCD.drawString("LightsensorL black", 0, 7);
                 next = 2;
+                //turn=false;
             }
-            if (SensorValues.getLightValue(LightSensorR) < LowLightThress && next == 2) {
+            if (SensorValues.getLightValue(LightSensorL) > LowLightThress && next == 2) {
                 LCD.drawString("LightsensorL black", 0, 7);
                 turn = false;                
             }
-            if (SensorValues.getLightValue(LightSensor3) < LowLightThress && next == 0) {
+            if (SensorValues.getLightValue(LightSensor3) < HighLightThress && next == 0) {
                next = 1;
             }
 

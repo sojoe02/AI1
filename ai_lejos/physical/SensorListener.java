@@ -45,6 +45,7 @@ public class SensorListener implements Runnable, Constants {
             LCD.drawString("TachoB " + Integer.toString(SensorValues.getTachoValue(TachoB)), 0, 4);
             LCD.drawString("TachoC " + Integer.toString(SensorValues.getTachoValue(TachoC)), 0, 5);
             
+            
         }
     }
 }

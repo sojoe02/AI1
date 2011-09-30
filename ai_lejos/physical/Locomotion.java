@@ -38,6 +38,9 @@ public class Locomotion implements Runnable, Constants{
                         case RELEASE:
                                 new ReleaseCan();
                                 break;
+                        case PAUSE:
+                                Button.waitForPress();
+                                break;
                         case BREAK:
                             fetchInstructions = false;
                             break;

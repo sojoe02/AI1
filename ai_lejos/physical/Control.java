@@ -1,22 +1,17 @@
 package ai_lejos.physical;
 
 import ai_lejos.logical.Instructor;
-import lejos.nxt.Button;
-import lejos.nxt.LCD;
-import lejos.nxt.LightSensor;
-import lejos.nxt.*;
-import lejos.nxt.SensorPort;
 
-public class Control {
+import lejos.nxt.*;
+
+
+public class Control {   
 
     public Control(Instructor instructor) {
 
         LightSensor s1;
         LightSensor s2;
-        LightSensor s3;
-        
-        
-        
+        LightSensor s3;        
 
         s1 = new LightSensor(SensorPort.S1);
         s2 = new LightSensor(SensorPort.S2);
@@ -32,10 +27,9 @@ public class Control {
         Button.waitForPress();
         s1.calibrateHigh();
         s2.calibrateHigh();
-        s3.calibrateHigh();*/
+        s3.calibrateHigh();*/            
         
         
-        LCD.drawString("calibrations complete", 0, 6);
 
         SensorValues sensorValues = new SensorValues();
         SensorListener sensorListener = new SensorListener(sensorValues,s1,s2,s3);

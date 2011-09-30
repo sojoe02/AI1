@@ -22,8 +22,8 @@ public class Forward implements Constants {
         Motor.A.setSpeed(MaxSpeed);
         Motor.B.setSpeed(MaxSpeed);
 
-        //Motor.A.setAcceleration(180);
-        //Motor.B.setAcceleration(180);
+        //Motor.A.setAcceleration(280);
+        //Motor.B.setAcceleration(280);
 
 
 
@@ -36,36 +36,31 @@ public class Forward implements Constants {
         while (drive == true) {
             //control of drivestate.
 
-            if (SensorValues.getLightValue(LightSensorR) > LowLightThress && left == true) {
-                //&& SensorValues.getLightValue(LightSensorL) < HighLightThress) {
-                driveControl('l');
-                LCD.drawString("LEFT   ", 0, 7);
-                right = false;
-                if (SensorValues.getLightValue(LightSensorR) < HighLightThress
-                        && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
-                    driveControl('s');
-                    LCD.drawString("STRAIGHT   <", 0, 7);
-                    right = true;
-
-                }
-            }
-            if (SensorValues.getLightValue(LightSensorL) > LowLightThress && right == true) {
-                //&& SensorVaues.getLightValue(LightSensorL) > HighLightThress) {
-                driveControl('r');
-                LCD.drawString("RIGHT       ", 0, 7);
-                left= false;
-                if (SensorValues.getLightValue(LightSensorR) < HighLightThress
-                        && SensorValues.getLightValue(LightSensorL) < HighLightThress) {
-                    driveControl('s');
-                    LCD.drawString("STRAIGHT   <", 0, 7);
-                    left = true;
-                }
-                //else when you have reached a crosssection:
-            }
-            if (SensorValues.getLightValue(LightSensor3) < HighLightThress) {
+            if ((SensorValues.getLightValue(LightSensorL) < HighLightThress
+                    && SensorValues.getLightValue(LightSensorR) < HighLightThress)
+                    || SensorValues.getLightValue(LightSensor3) < HighLightThress) {
                 driveControl('e');
                 LCD.drawString("Stopping            ", 0, 7);
                 drive = false;
+            } 
+
+                if (SensorValues.getLightValue(LightSensorR) < HighLightThress) {
+                    //&& SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+                    driveControl('r');
+                    LCD.drawString("RIGHT   ", 0, 7);
+
+                }
+                if (SensorValues.getLightValue(LightSensorR) > HighLightThress
+                        && SensorValues.getLightValue(LightSensorL) > HighLightThress) {
+                    driveControl('s');
+                    LCD.drawString("STRAIGHT   <", 0, 7);
+                }
+                if (SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+                    //&& SensorVaues.getLightValue(LightSensorL) > HighLightThress) {
+                    driveControl('l');
+                    LCD.drawString("LEFT       ", 0, 7);
+                
+
             }
         }
 
@@ -81,10 +76,8 @@ public class Forward implements Constants {
                 break;
             case 'l':
                 Motor.A.setSpeed(CompensationSpeed);
-                //Motor.B.setSpeed(MaxSpeed);
                 break;
             case 'r':
-                //Motor.A.setSpeed(MaxSpeed);
                 Motor.B.setSpeed(CompensationSpeed);
                 break;
             case 'e':
@@ -102,14 +95,10 @@ public class Forward implements Constants {
         int oldTacho = SensorValues.getTachoValue(TachoA);
 
         while (drift) {
-            // if (SensorValues.getTachoValue(TachoA) > 0) {
             if (SensorValues.getTachoValue(TachoA) - oldTacho > TachoThressStop) {
-                //Motor.A.setAcceleration(Integer.MAX_VALUE);
-                //Motor.B.setAcceleration(Integer.MAX_VALUE);
                 Motor.A.flt(true);
                 Motor.B.flt(true);
                 drift = false;
-                //     }
             }
         }
 

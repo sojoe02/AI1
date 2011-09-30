@@ -17,12 +17,20 @@ public class Instructor implements PhysicalToLogical, Constants{
                     
                 for(int i = 0; i < 100; i++ ){
                 
-		instructions.add(FORWARD);
+		
+                    
+                    
+                    
+                    
+                instructions.add(FORWARD);
                 //Button.waitForPress();
-                instructions.add(LEFT);
-                }
-		//instructions.add(RELEASE);
                 
+                
+		//instructions.add(RELEASE);
+                instructions.add(LEFT);
+                
+                //instructions.add(BREAK);
+                }
                //instructions.add(FORWARD);
 		//instructions.add(LEFT);
                 /*instructions.add(FORWARD);
