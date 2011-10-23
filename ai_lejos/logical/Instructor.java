@@ -15,10 +15,7 @@ public class Instructor implements PhysicalToLogical, Constants{
 	public Instructor(){
 		instructions = new ArrayList<Integer>();
                     
-                for(int i = 0; i < 100; i++ ){
-                
-		
-                    
+                for(int i = 0; i < 100; i++ ){     
                     
                     
                     

@@ -36,26 +36,26 @@ public class Forward implements Constants {
         while (drive == true) {
             //control of drivestate.
 
-            if ((SensorValues.getLightValue(LightSensorL) < HighLightThress
-                    && SensorValues.getLightValue(LightSensorR) < HighLightThress)
-                    || SensorValues.getLightValue(LightSensor3) < HighLightThress) {
+            if ((SensorValues.lightR < HighLightThress
+                    && SensorValues.lightL < HighLightThress)
+                    || SensorValues.light3 < HighLightThress) {
                 driveControl('e');
                 LCD.drawString("Stopping            ", 0, 7);
                 drive = false;
             } 
 
-                if (SensorValues.getLightValue(LightSensorR) < HighLightThress) {
+                if (SensorValues.lightR < HighLightThress) {
                     //&& SensorValues.getLightValue(LightSensorL) < HighLightThress) {
                     driveControl('r');
                     LCD.drawString("RIGHT   ", 0, 7);
 
                 }
-                if (SensorValues.getLightValue(LightSensorR) > HighLightThress
-                        && SensorValues.getLightValue(LightSensorL) > HighLightThress) {
+                if (SensorValues.lightR > HighLightThress
+                        && SensorValues.lightL > HighLightThress) {
                     driveControl('s');
                     LCD.drawString("STRAIGHT   <", 0, 7);
                 }
-                if (SensorValues.getLightValue(LightSensorL) < HighLightThress) {
+                if (SensorValues.lightL < HighLightThress) {
                     //&& SensorVaues.getLightValue(LightSensorL) > HighLightThress) {
                     driveControl('l');
                     LCD.drawString("LEFT       ", 0, 7);

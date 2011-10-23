@@ -10,6 +10,9 @@ public class SensorValues implements Constants{
     
     private static int[] LightValues = new int[3];
     private static int[] TachoValues = new int[3];
+    public static int lightR=0;
+    public static int lightL=0;
+    public static int light3=0;
     
     public static boolean[] HighDark = new boolean[3];
     
@@ -19,10 +22,23 @@ public class SensorValues implements Constants{
      
      public static synchronized void setLightValue(int index, int value){
          //LightValues.add(index, value);         
-         LightValues[index] = value;
+         /*LightValues[index] = value;
          if(value < HighLightThress){
              HighDark[index] = true;
          } else HighDark[index] = false;
+          * 
+          */
+         /*if(index == 1){
+             light1 =value;
+             
+         }
+         if(index==2){
+             light2 =value;
+             
+         }
+         if(index==3){
+             lightlight3;
+         }*/
      }
      
      public static synchronized int getLightValue(int index){
